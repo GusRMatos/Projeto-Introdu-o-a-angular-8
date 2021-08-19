@@ -1,0 +1,51 @@
+<h2>Opções</h2>
+
+<hr>
+<div class="apresent-group row">
+    <div class="col-sm-10">
+        <p><img [src] = "game.imageUrl" width="190" height="200"></p> 
+    </div>
+</div>
+<div class="apresent-group row">
+    <label class="col-sm-2 col-form-label">Nome:</label>
+    <div class="col-sm-10">
+        <p>{{game.name}}</p> 
+    </div>
+</div>
+<div class="apresent-group row">
+    <label class="col-sm-2 col-form-label">Lançamento:</label>
+    <div class="col-sm-10">
+        <p>{{game.releaseDate | date: 'dd MMMM yyyy'}}</p> 
+    </div>
+</div>
+<div class="apresent-group row">
+    <label class="col-sm-2 col-form-label">Criadora:</label>
+    <div class="col-sm-10">
+        <p>{{game.manufacturer}}</p> 
+    </div>
+</div>
+<div class="apresent-group row">
+    <label class="col-sm-2 col-form-label">Descrição:</label>
+    <div class="col-sm-10">
+        <p>{{game.description}}</p> 
+    </div>
+</div>
+<div class="apresent-group row">
+    <label class="col-sm-2 col-form-label">Preço:</label>
+    <div class="col-sm-10">
+        <p>{{'R$' + game.price}}</p> 
+    </div>
+</div>
+<form #gameForm = 'ngForm' *ngIf = 'game'>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Avaliação:</label>
+        <div class="col-sm-10">
+            <input [(ngModel)] = 'game.rating' required name = "rating" #gameRating = 'ngModel' type = "number" [ngClass] = "{'is-invalid': gameRating.invalid}" class= "form-control">
+            <div class = "invalid-feedback">
+                <span>Campo obrigatorio</span>
+            </div>
+        </div>
+    </div>
+    <button [disabled] = "gameForm.invalid" (click) = "save()"class="btn btn-primary mr-2">Salvar</button>
+    <button [routerLink] = "['/games']" routerLinkAtive = "active" class="nav-link" class="btn btn-secundary mr-2">Voltar</button>
+</form>

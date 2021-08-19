@@ -1,0 +1,42 @@
+<h2>Catalogo de Jogos</h2>
+
+<div class="form-group row">
+
+  <label class="col-sm-2 col-form-label">Filtro:</label>
+
+  <div class="col-sm-10">
+      <input [(ngModel)] = 'filter' class= "form-control">
+  </div>
+
+</div>
+
+<table class= "table table-striped">
+  <thead>
+      <tr>
+        <th>Capa</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Fabricante</th>
+        <th>Avaliação</th>
+        <th>Lançamento</th>
+        <th>Opções</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let game of filteredGames">
+      <td><img [src] = "game.imageUrl" width="90" height="100"></td>
+      <td>{{game.name}}</td>
+      <td>{{('R$-' + game.price) | replace: '-': ' '}}</td>
+      <td>{{game.manufacturer | replace: '-': ' '}}</td>
+      <td>
+          <app-star [rating] = "game.rating"></app-star>
+          {{game.rating}}
+      </td>
+      <td>{{game.releaseDate | date: 'dd/MM/yyyy'}}</td>
+      <td>
+        <a [routerLink] = "['/games/info', game.id]" class="btn btn-primary">Continuar</a>
+        <button (click) = "deleteById(game.id)" class = "btn btn-danger">Apagar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
